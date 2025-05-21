@@ -3,7 +3,7 @@ using MinimalApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Add DI - Add Service
+// Add DI - Add Service
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<VehicleDb>(opt => opt.UseInMemoryDatabase("VehicleList"));
@@ -11,6 +11,8 @@ builder.Services.AddDbContext<VehicleDb>(opt => opt.UseInMemoryDatabase("Vehicle
 var app = builder.Build();
 
 // Configure Pipeline - Use Method...
+app.MapGet("/", () => "Hello World!");  // Додай цей рядок для головної сторінки
+
 app.MapGet("/vehicles", async (VehicleDb db) =>
     await db.Vehicles.ToListAsync());
 
